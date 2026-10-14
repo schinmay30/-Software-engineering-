@@ -1,0 +1,8 @@
+************* Module pharmacy_manager
+pharmacy_manager.py:149:4: C0415: Import outside toplevel (json) (import-outside-toplevel)
+pharmacy_manager.py:157:4: C0415: Import outside toplevel (json) (import-outside-toplevel)
+pharmacy_manager.py:159:4: W0603: Using the global statement (global-statement)
+
+------------------------------------------------------------------
+Your code has been rated at 9.76/10 (previous run: 9.76/10, +0.00)
+

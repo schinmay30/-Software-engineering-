@@ -3,6 +3,7 @@
 import ast
 import hashlib
 import hmac
+import json
 import operator
 import os
 import secrets
@@ -51,7 +52,6 @@ def add_medicine(
         }
 
     medicines[name]["qty"] += qty
-
     audit.append(
         f"{datetime.now()}: Stocked {qty} units of {name}"
     )
@@ -102,7 +102,7 @@ def bill_amount(prescription):
 
 
 def calculate_dosage(formula):
-    """Evaluate a simple arithmetic expression without eval."""
+    """Evaluate a basic arithmetic expression without eval."""
     try:
         expression = ast.parse(formula, mode="eval").body
     except (SyntaxError, TypeError) as error:
@@ -125,12 +125,7 @@ def calculate_dosage(formula):
 
         raise ValueError("Only basic arithmetic is permitted.")
 
-    result = evaluate(expression)
-
-    if not isinstance(result, (int, float)):
-        raise ValueError("Dosage result must be numeric.")
-
-    return result
+    return evaluate(expression)
 
 
 def patient_id(name, phone):
@@ -146,25 +141,20 @@ def generate_rx_number():
 
 def save_stock(file=STOCK_FILE):
     """Save inventory as JSON."""
-    import json
-
     with open(file, "w", encoding="utf-8") as stock_file:
         json.dump(medicines, stock_file, indent=4)
 
 
 def load_stock(file=STOCK_FILE):
     """Load inventory from JSON."""
-    import json
-
-    global medicines
-
     with open(file, "r", encoding="utf-8") as stock_file:
         loaded_medicines = json.load(stock_file)
 
     if not isinstance(loaded_medicines, dict):
         raise ValueError("Invalid stock data.")
 
-    medicines = loaded_medicines
+    medicines.clear()
+    medicines.update(loaded_medicines)
 
 
 def print_label(name):
@@ -225,14 +215,8 @@ def main():
 
     dispense_medicine("Paracetamol 500mg", 30)
 
-    print(
-        "Paracetamol stock:",
-        get_quantity("Paracetamol 500mg"),
-    )
-    print(
-        "Amoxicillin expired?",
-        is_expired("Amoxicillin 250mg"),
-    )
+    print("Paracetamol stock:", get_quantity("Paracetamol 500mg"))
+    print("Amoxicillin expired?", is_expired("Amoxicillin 250mg"))
     print(
         "Bill:",
         bill_amount(
