@@ -81,3 +81,5 @@ def test_gallery_below_ninety_percent():
 
 def test_gallery_with_zero_capacity():
     assert gallery_entry(0, 0, False) == "wait"
+
+# Lab 6: Code coverage test suite.
