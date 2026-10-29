@@ -41,3 +41,5 @@ def gallery_entry(visitors_inside, capacity, has_timed_slot):
     if visitors_inside * 10 >= capacity * 9 and not has_timed_slot:
         return "queue"
     return "enter"
+
+# Lab 6: Museum admission application.
