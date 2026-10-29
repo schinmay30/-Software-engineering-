@@ -9,3 +9,5 @@ def test_small_group():
     assert group_discount(4, False) == 0
 
 #Write the rest of the test cases so that the code is 90- 100% covered.
+
+# Lab 6: Museum admission unit tests.
