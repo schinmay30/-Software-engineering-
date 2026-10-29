@@ -43,3 +43,4 @@ The application is tested using `pytest`, with `coverage.py` used to measure cod
 ## Conclusion
 
 Code coverage and branch coverage help evaluate how thoroughly an application has been tested. Testing different inputs, boundary conditions, and decision outcomes helps identify potential issues and improve software reliability.
+The project includes separate test suites for statement coverage and branch coverage.
